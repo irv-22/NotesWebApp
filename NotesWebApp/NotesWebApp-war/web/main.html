@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 300px;
+            padding: 15px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: vertical;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+
+        button, input[type="submit"] {
+            padding: 12px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            margin-right: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .Clear-btn {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .Clear-btn:hover {
+            background-color: #e53935;
+        }
+
+        .share-btn {
+            background-color: #2196F3;
+            color: white;
+        }
+
+        .share-btn:hover {
+            background-color: #1e88e5;
+        }
+
+        a {
+            text-decoration: none;
+            color: #2196F3;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <strong><a href="index.html">&lt;&lt;</a></strong>
+        <h1>Notes</h1>
+        <form action="SaveToDBServlet.do" method="POST">
+            <textarea id="noteArea" placeholder="Write your notes here..." name="textArea"></textarea><br><br>
+            <input type="submit" name="Save" value="Save">
+        </form>
+        <button class="Clear-btn" onclick="clearNote()" name="Clear">Clear Note</button>
+        <button class="share-btn" onclick="shareNote()">Share Note</button>
+    </div>
+
+    <script>
+        function clearNote() {
+            document.getElementById('noteArea').value = '';
+            alert('Note cleared!');
+        }
+
+        function shareNote() {
+            const noteContent = document.getElementById('noteArea').value;
+            navigator.clipboard.writeText(noteContent).then(() => {
+                alert('Note copied to clipboard! You can now share it.');
+            }).catch(err => {
+                alert('Failed to copy the note: ' + err);
+            });
+        }
+    </script>
+</body>
+</html>
+
